@@ -1,6 +1,6 @@
 package net.zecher.backend.controller;
 
-import net.zecher.backend.ObservationTypeEnum;
+import net.zecher.backend.ObservationType;
 import net.zecher.backend.dto.TrafficSignObservationDto;
 import net.zecher.backend.service.TrafficSignObservationServiceImpl;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +27,7 @@ public class TrafficSignObservationController {
 
     @GetMapping(CONTROLLER_PATH)
     private ResponseEntity<List<TrafficSignObservationDto>> getTrafficSignObservations(@RequestParam(value = "type", required = false) String type, @RequestParam(value = "value", required = false) String value) {
-        ObservationTypeEnum typeEnum = ObservationTypeEnum.parse(type.toUpperCase());
+        ObservationType typeEnum = ObservationType.parse(type.toUpperCase());
         var result = observationService.getTrafficSignObservations(typeEnum, value);
         return ResponseEntity.ok(result);
     }

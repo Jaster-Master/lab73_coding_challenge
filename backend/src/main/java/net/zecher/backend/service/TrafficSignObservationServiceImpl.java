@@ -1,10 +1,7 @@
 package net.zecher.backend.service;
 
-import net.zecher.backend.ObservationTypeEnum;
+import net.zecher.backend.ObservationType;
 import net.zecher.backend.dto.TrafficSignObservationDto;
-import net.zecher.backend.model.ObservationType;
-import net.zecher.backend.repo.ObservationClusterRepo;
-import net.zecher.backend.repo.ObservationTypeRepo;
 import net.zecher.backend.repo.TrafficSignObservationRepo;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +12,9 @@ public class TrafficSignObservationServiceImpl implements TrafficSignObservation
 
     private static final int CLUSTER_RADIUS = 20;
 
-    private final ObservationTypeRepo typeRepo;
-    private final ObservationClusterRepo clusterRepo;
     private final TrafficSignObservationRepo observationRepo;
 
-    public TrafficSignObservationServiceImpl(ObservationTypeRepo typeRepo, ObservationClusterRepo clusterRepo, TrafficSignObservationRepo observationRepo) {
-        this.typeRepo = typeRepo;
-        this.clusterRepo = clusterRepo;
+    public TrafficSignObservationServiceImpl(TrafficSignObservationRepo observationRepo) {
         this.observationRepo = observationRepo;
     }
 
@@ -31,11 +24,7 @@ public class TrafficSignObservationServiceImpl implements TrafficSignObservation
     }
 
     @Override
-    public List<TrafficSignObservationDto> getTrafficSignObservations(ObservationTypeEnum type, String value) {
-        ObservationType observationType;
-        if(type != null){
-            observationType = typeRepo.findByObservationType(type.name());
-        }
+    public List<TrafficSignObservationDto> getTrafficSignObservations(ObservationType type, String value) {
 
         return List.of();
     }
