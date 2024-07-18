@@ -4,6 +4,7 @@ import net.zecher.backend.ObservationType;
 import net.zecher.backend.dto.TrafficSignObservationDto;
 import net.zecher.backend.service.TrafficSignObservationServiceImpl;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 @RestController
 public class TrafficSignObservationController {
 
-    private static final String CONTROLLER_PATH = "/api/traffic-sign-observations";
+    public static final String CONTROLLER_PATH = "/api/traffic-sign-observations";
 
     private final TrafficSignObservationServiceImpl observationService;
 
@@ -27,7 +28,10 @@ public class TrafficSignObservationController {
 
     @GetMapping(CONTROLLER_PATH)
     private ResponseEntity<List<TrafficSignObservationDto>> getTrafficSignObservations(@RequestParam(value = "type", required = false) String type, @RequestParam(value = "value", required = false) String value) {
-        ObservationType typeEnum = ObservationType.parse(type.toUpperCase());
+        ObservationType typeEnum = null;
+        if(type != null){
+            typeEnum = ObservationType.parse(type.toUpperCase());
+        }
         var result = observationService.getTrafficSignObservations(typeEnum, value);
         return ResponseEntity.ok(result);
     }

@@ -31,7 +31,8 @@ public class TrafficSignObservationServiceImpl implements TrafficSignObservation
 
     @Override
     public List<TrafficSignObservationDto> getTrafficSignObservations(ObservationType type, String value) {
-        var observations = observationRepo.findByObservationTypeAndValue(type.name(), value);
+        var typeName = type == null ? null : type.name();
+        var observations = observationRepo.findByObservationTypeAndValue(typeName, value);
         var mapper = new ModelMapper();
         List<TrafficSignObservationDto> observationDtos = new ArrayList<>();
         for (TrafficSignObservation observationDto : observations) {
