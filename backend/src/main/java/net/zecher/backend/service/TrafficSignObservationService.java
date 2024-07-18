@@ -1,6 +1,12 @@
 package net.zecher.backend.service;
 
-public class TrafficSignObservationService {
+import net.zecher.backend.dto.TrafficSignObservationDto;
 
-    private static final int CLUSTER_RADIUS = 20;
+import java.util.List;
+
+public interface TrafficSignObservationService {
+
+    TrafficSignObservationDto getTrafficSignObservation(long id);
+    List<TrafficSignObservationDto> getTrafficSignObservations();
+    TrafficSignObservationDto addTrafficSignObservation(TrafficSignObservationDto observationDto);
 }

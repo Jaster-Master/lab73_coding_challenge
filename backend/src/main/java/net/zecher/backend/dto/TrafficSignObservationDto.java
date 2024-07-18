@@ -1,6 +1,6 @@
 package net.zecher.backend.dto;
 
-import net.zecher.backend.ObservationType;
+import net.zecher.backend.ObservationTypeEnum;
 
 import java.util.Objects;
 
@@ -10,7 +10,7 @@ public class TrafficSignObservationDto {
     private double latitude;
     private double longitude;
     private int heading;
-    private ObservationType type;
+    private ObservationTypeEnum type;
     private String value;
     private long clusterId;
 
@@ -49,11 +49,11 @@ public class TrafficSignObservationDto {
         this.heading = heading;
     }
 
-    public ObservationType getType() {
+    public ObservationTypeEnum getType() {
         return type;
     }
 
-    public void setType(ObservationType type) {
+    public void setType(ObservationTypeEnum type) {
         this.type = type;
     }
 

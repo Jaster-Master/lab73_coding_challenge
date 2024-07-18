@@ -1,6 +1,6 @@
 package net.zecher.backend;
 
-public enum ObservationType {
+public enum ObservationTypeEnum {
     SPEED_LIMIT,
     PASSING_RESTRICTION,
     HIGHWAY_BEGIN,

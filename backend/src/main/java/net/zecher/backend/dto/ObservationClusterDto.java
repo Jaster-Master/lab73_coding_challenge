@@ -1,17 +1,17 @@
 package net.zecher.backend.dto;
 
-import net.zecher.backend.ObservationType;
+import net.zecher.backend.ObservationTypeEnum;
 
 import java.util.Objects;
 
-public class ClusterDto {
+public class ObservationClusterDto {
 
     private long clusterId;
-    private ObservationType type;
+    private ObservationTypeEnum type;
     private String value;
     private int radius;
 
-    public ClusterDto() {
+    public ObservationClusterDto() {
     }
 
     public long getClusterId() {
@@ -22,11 +22,11 @@ public class ClusterDto {
         this.clusterId = clusterId;
     }
 
-    public ObservationType getType() {
+    public ObservationTypeEnum getType() {
         return type;
     }
 
-    public void setType(ObservationType type) {
+    public void setType(ObservationTypeEnum type) {
         this.type = type;
     }
 
@@ -50,7 +50,7 @@ public class ClusterDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ClusterDto that = (ClusterDto) o;
+        ObservationClusterDto that = (ObservationClusterDto) o;
         return clusterId == that.clusterId && radius == that.radius && type == that.type && Objects.equals(value, that.value);
     }
 
