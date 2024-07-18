@@ -1,5 +1,6 @@
 package net.zecher.backend.service;
 
+import net.zecher.backend.ObservationTypeEnum;
 import net.zecher.backend.dto.TrafficSignObservationDto;
 import net.zecher.backend.model.ObservationType;
 import net.zecher.backend.repo.ObservationClusterRepo;
@@ -30,7 +31,12 @@ public class TrafficSignObservationServiceImpl implements TrafficSignObservation
     }
 
     @Override
-    public List<TrafficSignObservationDto> getTrafficSignObservations() {
+    public List<TrafficSignObservationDto> getTrafficSignObservations(ObservationTypeEnum type, String value) {
+        ObservationType observationType;
+        if(type != null){
+            observationType = typeRepo.findByObservationType(type.name());
+        }
+
         return List.of();
     }
 

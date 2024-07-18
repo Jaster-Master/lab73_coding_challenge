@@ -6,5 +6,13 @@ public enum ObservationTypeEnum {
     HIGHWAY_BEGIN,
     HIGHWAY_END,
     CITY_BEGIN,
-    CITY_END
+    CITY_END;
+
+    public static ObservationTypeEnum parse(String type){
+        try {
+            return ObservationTypeEnum.valueOf(type.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+    }
 }

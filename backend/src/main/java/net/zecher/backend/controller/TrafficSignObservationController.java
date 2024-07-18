@@ -1,12 +1,10 @@
 package net.zecher.backend.controller;
 
+import net.zecher.backend.ObservationTypeEnum;
 import net.zecher.backend.dto.TrafficSignObservationDto;
 import net.zecher.backend.service.TrafficSignObservationServiceImpl;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,8 +26,10 @@ public class TrafficSignObservationController {
     }
 
     @GetMapping(CONTROLLER_PATH)
-    private ResponseEntity<List<TrafficSignObservationDto>> getTrafficSignObservations() {
-        return ResponseEntity.ok(List.of(new TrafficSignObservationDto()));
+    private ResponseEntity<List<TrafficSignObservationDto>> getTrafficSignObservations(@RequestParam(value = "type", required = false) String type, @RequestParam(value = "value", required = false) String value) {
+        ObservationTypeEnum typeEnum = ObservationTypeEnum.parse(type.toUpperCase());
+        var result = observationService.getTrafficSignObservations(typeEnum, value);
+        return ResponseEntity.ok(result);
     }
 
     @PostMapping(CONTROLLER_PATH)
