@@ -4,7 +4,6 @@ import net.zecher.backend.ObservationType;
 import net.zecher.backend.dto.TrafficSignObservationDto;
 import net.zecher.backend.service.TrafficSignObservationServiceImpl;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
