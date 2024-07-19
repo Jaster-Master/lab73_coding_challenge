@@ -1,5 +1,4 @@
-import {useEffect, useState} from 'react'
-import './Login.css'
+import {FormEvent, useEffect, useState} from 'react'
 import {AuthDto} from "../model/auth_dto.ts";
 import {useNavigate} from "react-router-dom";
 
@@ -15,9 +14,10 @@ function Login() {
         }
     }, [navigate]);
 
-    function onButtonClick() {
+    function onLogin(event: FormEvent) {
+        event.preventDefault();
         if (!userName || !password) {
-            setErrorLabel("UserName and/or password is empty!");
+            setErrorLabel("Username and/or password is empty!");
             return;
         }
         const authDto: AuthDto = {
@@ -33,7 +33,7 @@ function Login() {
                 body: JSON.stringify(authDto)
             });
             if (response.status.toString().startsWith("4")) {
-                setErrorLabel("This credentials are wrong or do not exist!");
+                setErrorLabel("These credentials are wrong or do not exist!");
                 return Promise.reject();
             }
             if (response.status.toString().startsWith("5")) {
@@ -50,22 +50,28 @@ function Login() {
                     sessionStorage.setItem("token", data);
                     navigate("/home");
                 } else {
-                    setErrorLabel("This credentials are wrong or do not exist!");
+                    setErrorLabel("These credentials are wrong or do not exist!");
                 }
             });
     }
 
     return (
         <>
-            <div className="login">
-                <h1>Login</h1>
-                <input type="text" value={userName} placeholder="UserName"
-                       onChange={(e) => setUserName(e.target.value)}/>
-                <input type="password" value={password} placeholder={"Password"}
-                       onChange={(e) => setPassword(e.target.value)}/>
-                <div className="text-red-600">{errorLabel}</div>
-                <button onClick={onButtonClick}>Login</button>
-            </div>
+            <form className="text-center" onSubmit={onLogin}>
+                <h1 className="mb-6">Login</h1>
+                <div className="mb-6">
+                    <input type="text" className="w-64 h-12" value={userName} placeholder="Username"
+                           onChange={(e) => setUserName(e.target.value)}/>
+                </div>
+                <div className="mb-6">
+                    <input type="password" className="w-64 h-12" value={password} placeholder={"Password"}
+                           onChange={(e) => setPassword(e.target.value)}/>
+                </div>
+                <div className={'text-red-600 ' + (errorLabel !== '' ? 'mb-6' : '')}>
+                    <span className="inline-block w-64">{errorLabel}</span>
+                </div>
+                <button type="submit" className="w-64 h-12">Login</button>
+            </form>
         </>
     )
 }
