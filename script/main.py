@@ -36,17 +36,19 @@ if __name__ == '__main__':
 
     headers = {'Content-Type': 'application/json'}
 
-    response = requests.post(loginUrl, json=authJson, headers=headers)
+    response = requests.post(loginUrl, data=authJson, headers=headers)
 
     token = response.text
+
+    headers['Authorization'] = 'Bearer ' + token
 
     with open(fileName) as f:
         fileLines = f.readlines()
 
     for fileLine in fileLines:
         split = fileLine.split(",")
-        observationDto = TrafficSignObservationDto(0, split[0], split[1], split[2], split[3])
+        observationDto = TrafficSignObservationDto(0, split[0], split[1], split[2], split[3], None)
         if len(split) > 4:
             observationDto.value = split[4]
         observationJson = json.dumps(observationDto.__dict__)
-        requests.post(postUrl, json=observationJson, headers={"Authorization": token})
+        requests.post(postUrl, data=observationJson, headers=headers)
