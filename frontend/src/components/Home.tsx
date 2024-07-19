@@ -38,7 +38,9 @@ function Home() {
                     {observations.map((observation: TrafficSignObservationDto) => (
                         <li key={observation.id}>
                             {observation.type} at ({observation.latitude}, {observation.longitude}) with
-                            value: {observation.value}
+                            heading: {observation.heading} {observation.value != null ? 'and value: ' + observation.value : ''}
+                            <a target="_blank" href={'https://www.google.com/maps/search/?api=1&query=' + observation.latitude + ',' + observation.longitude}>Click
+                                here</a>
                         </li>
                     ))}
                 </ul>

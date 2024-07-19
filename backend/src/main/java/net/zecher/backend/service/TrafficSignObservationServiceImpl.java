@@ -6,7 +6,6 @@ import net.zecher.backend.dto.TrafficSignObservationDto;
 import net.zecher.backend.model.TrafficSignObservation;
 import net.zecher.backend.repo.TrafficSignObservationRepo;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,7 +14,8 @@ import java.util.List;
 @Service
 public class TrafficSignObservationServiceImpl implements TrafficSignObservationService {
 
-    private static final double CLUSTER_RADIUS = 0.05; // km
+    private static final double CLUSTER_RADIUS = 0.1; // km
+    private static final int HEADING_THRESHOLD = 90; // degrees
 
     private final TrafficSignObservationRepo observationRepo;
 
@@ -54,7 +54,10 @@ public class TrafficSignObservationServiceImpl implements TrafficSignObservation
         var mapper = new ModelMapper();
         var observations = observationRepo.findByObservationTypeAndValue(observationDto.getType().name(), observationDto.getValue());
         for (TrafficSignObservation observation : observations) {
-            if (GeoUtils.haversine(observationDto.getLatitude(), observationDto.getLongitude(), observation.getLatitude(), observation.getLongitude()) < CLUSTER_RADIUS) {
+            boolean isWithinDistance = GeoUtils.haversine(observationDto.getLatitude(), observationDto.getLongitude(),
+                    observation.getLatitude(), observation.getLongitude()) < CLUSTER_RADIUS;
+            boolean isWithinHeading = Math.abs(observation.getHeading() - observationDto.getHeading()) < HEADING_THRESHOLD;
+            if (isWithinDistance && isWithinHeading) {
                 double newLatitude = (observationDto.getLatitude() + observation.getLatitude()) / 2;
                 double newLongitude = (observationDto.getLongitude() + observation.getLongitude()) / 2;
                 observation.setLatitude(newLatitude);
