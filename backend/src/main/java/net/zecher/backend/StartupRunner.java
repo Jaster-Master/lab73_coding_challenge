@@ -20,6 +20,7 @@ public class StartupRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         var csvFile = new File("sign_data.csv");
+        if (!csvFile.exists()) return;
         var lines = Files.readAllLines(csvFile.toPath());
         for (String line : lines) {
             String[] split = line.split(",");
