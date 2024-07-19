@@ -7,6 +7,9 @@ public class AuthDto {
     private String userName;
     private String password;
 
+    public AuthDto() {
+    }
+
     public String getUserName() {
         return userName;
     }
