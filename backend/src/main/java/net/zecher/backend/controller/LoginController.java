@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,15 +26,18 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Boolean> register(AuthDto authDto) {
+    public ResponseEntity<Boolean> register(@RequestBody AuthDto authDto) {
         // Https should be used
         userService.registerUser(authDto);
         return ResponseEntity.ok(true);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(AuthDto authDto) {
+    public ResponseEntity<String> login(@RequestBody AuthDto authDto) {
         // Https should be used
+        if (authDto.getUserName() == null) {
+            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+        }
         Authentication authenticationRequest =
                 UsernamePasswordAuthenticationToken.unauthenticated(authDto.getUserName(), authDto.getPassword());
         Authentication authenticationResponse =

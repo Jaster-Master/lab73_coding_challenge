@@ -9,5 +9,7 @@ import java.util.List;
 @Repository
 public interface TrafficSignObservationRepo extends JpaRepository<TrafficSignObservation, Long> {
 
+    List<TrafficSignObservation> findByObservationType(String observationType);
+
     List<TrafficSignObservation> findByObservationTypeAndValue(String observationType, String value);
 }

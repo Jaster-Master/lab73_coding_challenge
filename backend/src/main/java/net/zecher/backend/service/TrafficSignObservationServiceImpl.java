@@ -6,6 +6,7 @@ import net.zecher.backend.dto.TrafficSignObservationDto;
 import net.zecher.backend.model.TrafficSignObservation;
 import net.zecher.backend.repo.TrafficSignObservationRepo;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -32,7 +33,14 @@ public class TrafficSignObservationServiceImpl implements TrafficSignObservation
     @Override
     public List<TrafficSignObservationDto> getTrafficSignObservations(ObservationType type, String value) {
         var typeName = type == null ? null : type.name();
-        var observations = observationRepo.findByObservationTypeAndValue(typeName, value);
+        List<TrafficSignObservation> observations;
+        if (typeName != null && value != null) {
+            observations = observationRepo.findByObservationTypeAndValue(typeName, value);
+        } else if (typeName != null) {
+            observations = observationRepo.findByObservationType(typeName);
+        } else {
+            observations = observationRepo.findAll();
+        }
         var mapper = new ModelMapper();
         List<TrafficSignObservationDto> observationDtos = new ArrayList<>();
         for (TrafficSignObservation observationDto : observations) {

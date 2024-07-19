@@ -36,7 +36,7 @@ public class TrafficSignObservationController {
     }
 
     @PostMapping(CONTROLLER_PATH)
-    private ResponseEntity<TrafficSignObservationDto> postTrafficSignObservation(TrafficSignObservationDto observationDto) {
+    private ResponseEntity<TrafficSignObservationDto> postTrafficSignObservation(@RequestBody TrafficSignObservationDto observationDto) {
         var result = observationService.addTrafficSignObservation(observationDto);
         return ResponseEntity.ok(result);
     }
