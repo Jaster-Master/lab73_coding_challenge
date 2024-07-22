@@ -25,7 +25,6 @@ public class UserService implements UserDetailsService {
         var user = new User();
         user.setUserName(authDto.getUserName());
         user.setPasswordHash(hash);
-        user.setSalt(salt);
         userRepo.save(user);
     }
 
