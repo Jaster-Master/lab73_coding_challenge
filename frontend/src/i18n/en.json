@@ -1,0 +1,18 @@
+{
+  "login_header_label": "Login",
+  "login_label": "Login",
+  "user_name_label": "Username",
+  "password_label": "Password",
+  "empty_password_error": "Username and/or password is empty!",
+  "wrong_credentials_error": "These credentials are wrong or do not exist!",
+  "unknown_error": "An error occurred. Please try again later!",
+  "open_label": "Open",
+  "logout_label": "Logout",
+  "observations_header_label": "Traffic Sign Observations",
+  "filter_label": "Filter:",
+  "observation_type_label": "Observation-Type",
+  "latitude_longitude_label": "Latitude x Longitude",
+  "heading_label": "Heading",
+  "value_label": "Value",
+  "google_maps_label": "Google Maps"
+}

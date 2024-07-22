@@ -1,6 +1,7 @@
 import Login from "./components/Login.tsx";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./components/Home.tsx";
+import './i18n/config.ts'
 
 function App() {
     return (

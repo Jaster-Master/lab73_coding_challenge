@@ -1,17 +1,20 @@
-import {useEffect, useState} from 'react'
+import {useCallback, useEffect, useState} from 'react'
 import {TrafficSignObservationDto} from "../model/traffic_sign_observation_dto.ts";
 import {useNavigate} from "react-router-dom";
+import LanguageDropdown from "./LanguageDropdown.tsx";
+import {useTranslation} from "react-i18next";
 
 function Home() {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [observations, setObservations] = useState([]);
     const [searchFilter, setSearchFilter] = useState("");
     const [filteredObservations, setFilteredObservations] = useState([]);
 
-    function logout() {
+    const logout = useCallback(() => {
         sessionStorage.removeItem('token');
         navigate('/');
-    }
+    }, [navigate]);
 
     useEffect(() => {
         const newObservations = observations.filter(
@@ -42,28 +45,31 @@ function Home() {
         observationsRequest()
             .then(response => response.json())
             .then(data => setObservations(data));
-    }, [navigate]);
+    }, [logout, navigate]);
 
     return (
         <>
             <div className="App">
                 <div className="flex items-center justify-between">
-                    <h1 className="mb-6 inline">Traffic Sign Observations</h1>
-                    <button className="mb-6 right-0" onClick={logout}>Logout</button>
+                    <h1 className="mb-6 inline">{t('observations_header_label')}</h1>
+                    <span>
+                        <button className="me-4 mb-6 right-0" onClick={logout}>{t('logout_label')}</button>
+                        <LanguageDropdown isAbsolute={false}></LanguageDropdown>
+                    </span>
                 </div>
                 <div className="mb-6">
-                    <label className="w-64 h-12">Filter:</label>
+                    <label className="w-64 h-12">{t('filter_label')}</label>
                     <input type="text" className="w-64 h-12" value={searchFilter}
                            onChange={(e) => setSearchFilter(e.target.value.toUpperCase())}/>
                 </div>
                 <table className="table-auto w-full">
                     <thead>
                     <tr>
-                        <th>Observation-Type</th>
-                        <th>Latitude x Longitude</th>
-                        <th>Heading</th>
-                        <th>Value</th>
-                        <th>Google Maps</th>
+                        <th>{t('observation_type_label')}</th>
+                        <th>{t('latitude_longitude_label')}</th>
+                        <th>{t('heading_label')}</th>
+                        <th>{t('value_label')}</th>
+                        <th>{t('google_maps_label')}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -75,7 +81,7 @@ function Home() {
                             <td>{observation.value}</td>
                             <td>
                                 <a target="_blank"
-                                   href={'https://www.google.com/maps/search/?api=1&query=' + observation.latitude + ',' + observation.longitude}>Open</a>
+                                   href={'https://www.google.com/maps/search/?api=1&query=' + observation.latitude + ',' + observation.longitude}>{t('open_label')}</a>
                             </td>
                         </tr>
                     ))}

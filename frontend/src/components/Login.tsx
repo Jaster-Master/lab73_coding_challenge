@@ -1,8 +1,11 @@
 import {FormEvent, useEffect, useState} from 'react'
 import {AuthDto} from "../model/auth_dto.ts";
 import {useNavigate} from "react-router-dom";
+import LanguageDropdown from "./LanguageDropdown.tsx";
+import {useTranslation} from "react-i18next";
 
 function Login() {
+    const {t} = useTranslation();
     const navigate = useNavigate();
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
@@ -17,7 +20,7 @@ function Login() {
     function onLogin(event: FormEvent) {
         event.preventDefault();
         if (!userName || !password) {
-            setErrorLabel("Username and/or password is empty!");
+            setErrorLabel(t('empty_password_error'));
             return;
         }
         const authDto: AuthDto = {
@@ -33,11 +36,11 @@ function Login() {
                 body: JSON.stringify(authDto)
             });
             if (response.status.toString().startsWith("4")) {
-                setErrorLabel("These credentials are wrong or do not exist!");
+                setErrorLabel(t('wrong_credentials_error'));
                 return Promise.reject();
             }
             if (response.status.toString().startsWith("5")) {
-                setErrorLabel("An error occurred. Please try again later!");
+                setErrorLabel(t('unknown_error'));
                 return Promise.reject();
             }
 
@@ -50,7 +53,7 @@ function Login() {
                     sessionStorage.setItem("token", data);
                     navigate("/home");
                 } else {
-                    setErrorLabel("These credentials are wrong or do not exist!");
+                    setErrorLabel(t('wrong_credentials_error'));
                 }
             });
     }
@@ -58,19 +61,20 @@ function Login() {
     return (
         <>
             <form className="text-center" onSubmit={onLogin}>
-                <h1 className="mb-6">Login</h1>
+                <h1 className="mb-6">{t('login_header_label')}</h1>
+                <LanguageDropdown isAbsolute={true}></LanguageDropdown>
                 <div className="mb-6">
-                    <input type="text" className="w-64 h-12" value={userName} placeholder="Username"
+                    <input type="text" className="w-64 h-12" value={userName} placeholder={t('user_name_label')}
                            onChange={(e) => setUserName(e.target.value)}/>
                 </div>
                 <div className="mb-6">
-                    <input type="password" className="w-64 h-12" value={password} placeholder={"Password"}
+                    <input type="password" className="w-64 h-12" value={password} placeholder={t('password_label')}
                            onChange={(e) => setPassword(e.target.value)}/>
                 </div>
                 <div className={'text-red-600 ' + (errorLabel !== '' ? 'mb-6' : '')}>
                     <span className="inline-block w-64">{errorLabel}</span>
                 </div>
-                <button type="submit" className="w-64 h-12">Login</button>
+                <button type="submit" className="w-64 h-12">{t('login_label')}</button>
             </form>
         </>
     )

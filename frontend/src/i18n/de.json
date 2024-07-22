@@ -1,0 +1,18 @@
+{
+  "login_header_label": "Login",
+  "login_label": "Einloggen",
+  "user_name_label": "Benutzername",
+  "password_label": "Passwort",
+  "empty_password_error": "Benutzername und/oder Passwort ist leer!",
+  "wrong_credentials_error": "Diese Benutzerdaten sind falsch oder existieren nicht!",
+  "unknown_error": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut!",
+  "open_label": "Öffnen",
+  "logout_label": "Ausloggen",
+  "observations_header_label": "Verkehrszeichen-Beobachtungen",
+  "filter_label": "Filter:",
+  "observation_type_label": "Beobachtungstyp",
+  "latitude_longitude_label": "Latitude x Longitude",
+  "heading_label": "Richtung",
+  "value_label": "Wert",
+  "google_maps_label": "Google Maps"
+}
