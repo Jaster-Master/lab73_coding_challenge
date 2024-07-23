@@ -28,15 +28,18 @@ public class LoginController {
     @PostMapping("/register")
     public ResponseEntity<Boolean> register(@RequestBody AuthDto authDto) {
         // Https should be used
-        userService.registerUser(authDto);
-        return ResponseEntity.ok(true);
+        if (authDto.getUserName() == null || authDto.getUserName().isBlank()) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+        var result = userService.registerUser(authDto);
+        return ResponseEntity.ok(result);
     }
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody AuthDto authDto) {
         // Https should be used
-        if (authDto.getUserName() == null) {
-            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+        if (authDto.getUserName() == null || authDto.getUserName().isBlank()) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
         Authentication authenticationRequest =
                 UsernamePasswordAuthenticationToken.unauthenticated(authDto.getUserName(), authDto.getPassword());

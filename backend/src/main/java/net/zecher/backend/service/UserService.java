@@ -19,13 +19,17 @@ public class UserService implements UserDetailsService {
         this.userRepo = userRepo;
     }
 
-    public void registerUser(AuthDto authDto) {
+    public boolean registerUser(AuthDto authDto) {
+        if(userRepo.findByUserName(authDto.getUserName()) != null){
+            return false;
+        }
         var salt = BCrypt.gensalt();
         var hash = BCrypt.hashpw(authDto.getPassword(), salt);
         var user = new User();
         user.setUserName(authDto.getUserName());
         user.setPasswordHash(hash);
         userRepo.save(user);
+        return true;
     }
 
     @Override
