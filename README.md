@@ -25,3 +25,8 @@ To start the frontend either use the "dev" npm script or the web files in the re
 ## Script ##
 
 To start the script to upload the observations of "sign_data.csv" to the backend simply start the backend and use Python to execute the script. The script was written in Python 3.12.4.
+
+
+## Docker ##
+
+It is also possible to start an instance of MariaDB, the backend and the frontend with the docker-compose file.
