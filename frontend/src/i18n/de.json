@@ -6,6 +6,7 @@
   "empty_password_error": "Benutzername und/oder Passwort ist leer!",
   "wrong_credentials_error": "Diese Benutzerdaten sind falsch oder existieren nicht!",
   "unknown_error": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut!",
+  "no_data_label": "Es sind keine Daten verfügbar!",
   "open_label": "Öffnen",
   "logout_label": "Ausloggen",
   "observations_header_label": "Verkehrszeichen-Beobachtungen",

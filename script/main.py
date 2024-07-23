@@ -51,4 +51,5 @@ if __name__ == '__main__':
         if len(split) > 4:
             observationDto.value = split[4]
         observationJson = json.dumps(observationDto.__dict__)
+        print(observationJson)
         requests.post(postUrl, data=observationJson, headers=headers)

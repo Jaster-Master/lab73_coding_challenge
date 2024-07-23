@@ -6,6 +6,7 @@
   "empty_password_error": "Username and/or password is empty!",
   "wrong_credentials_error": "These credentials are wrong or do not exist!",
   "unknown_error": "An error occurred. Please try again later!",
+  "no_data_label": "No data available!",
   "open_label": "Open",
   "logout_label": "Logout",
   "observations_header_label": "Traffic Sign Observations",
