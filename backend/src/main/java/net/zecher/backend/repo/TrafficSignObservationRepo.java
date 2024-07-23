@@ -12,4 +12,6 @@ public interface TrafficSignObservationRepo extends JpaRepository<TrafficSignObs
     List<TrafficSignObservation> findByObservationType(String observationType);
 
     List<TrafficSignObservation> findByObservationTypeAndValue(String observationType, String value);
+
+    void deleteAll();
 }

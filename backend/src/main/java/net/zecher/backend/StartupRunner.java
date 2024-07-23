@@ -3,12 +3,12 @@ package net.zecher.backend;
 import net.zecher.backend.dto.TrafficSignObservationDto;
 import net.zecher.backend.service.TrafficSignObservationService;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
+//import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.nio.file.Files;
 
-@Component
+//@Component
 public class StartupRunner implements CommandLineRunner {
 
     private final TrafficSignObservationService observationService;
