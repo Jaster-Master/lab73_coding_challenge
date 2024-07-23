@@ -29,4 +29,4 @@ To start the script to upload the observations of "sign_data.csv" to the backend
 
 ## Docker ##
 
-It is also possible to start an instance of MariaDB, the backend and the frontend with the docker-compose file.
+It is also possible to start an instance of MariaDB, the backend and the frontend with the docker-compose file. The docker files in the frontend and backend folder are used to create the docker images.
