@@ -75,7 +75,7 @@ function Home() {
                     </thead>
                     <tbody>
                     {filteredObservations.length > 0 ? (filteredObservations.map((observation: TrafficSignObservationDto) => (
-                        <tr>
+                        <tr key={observation.id}>
                             <td>{observation.type}</td>
                             <td>{observation.latitude} x {observation.longitude}</td>
                             <td>{observation.heading}</td>
@@ -85,10 +85,14 @@ function Home() {
                                    href={'https://www.google.com/maps/search/?api=1&query=' + observation.latitude + ',' + observation.longitude}>{t('open_label')}</a>
                             </td>
                         </tr>
-                    ))) : (<div
-                        className="absolute no-data-label-width h-2/3 text-center flex justify-center items-center">
-                        {t('no_data_label')}
-                    </div>)}
+                    ))) : (
+                        <tr>
+                            <td
+                                className="absolute no-data-label-width h-2/3 text-center flex justify-center items-center">
+                                {t('no_data_label')}
+                            </td>
+                        </tr>
+                    )}
                     </tbody>
                 </table>
             </div>

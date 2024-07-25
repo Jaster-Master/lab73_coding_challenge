@@ -12,10 +12,10 @@ function LanguageDropdown({isAbsolute}) {
 
     return (
         <>
-            <select onChange={onLanguageChange}
+            <select defaultValue={i18n.language} onChange={onLanguageChange}
                     className={(isAbsolute ? 'absolute ' : '') + 'right-10 top-8 w-64 h-12'}>
-                <option value="en" selected={i18n.language == 'en'}>English</option>
-                <option value="de" selected={i18n.language == 'de'}>Deutsch</option>
+                <option value="en">English</option>
+                <option value="de">Deutsch</option>
             </select>
         </>
     )
