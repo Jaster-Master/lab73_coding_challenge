@@ -7,7 +7,10 @@ function LanguageDropdown({isAbsolute}) {
     const {i18n} = useTranslation()
 
     function onLanguageChange(event: ChangeEvent<HTMLSelectElement>) {
-        i18n.changeLanguage(event.target.value);
+        const selectedLanguage = event.target.value;
+        i18n.changeLanguage(selectedLanguage).then(() => {
+            localStorage.setItem('lang', selectedLanguage);
+        });
     }
 
     return (

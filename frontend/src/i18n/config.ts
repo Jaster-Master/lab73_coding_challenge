@@ -13,10 +13,13 @@ const resources = {
 }
 
 i18next.use(initReactI18next).init({
-    lng: 'en',
+    fallbackLng: () => {
+        const selectedLanguage = localStorage.getItem('lang');
+        if (selectedLanguage != null) {
+            return selectedLanguage;
+        }
+        return 'en';
+    },
     debug: true,
     resources: resources,
-    // if you see an error like: "Argument of type 'DefaultTFuncReturn' is not assignable to parameter of type xyz"
-    // set returnNull to false (and also in the i18next.d.ts options)
-    // returnNull: false,
 });
